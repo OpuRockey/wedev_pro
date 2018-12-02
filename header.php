@@ -1,5 +1,4 @@
 <?php include "core/action_hook.php" ;?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

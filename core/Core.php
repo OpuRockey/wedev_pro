@@ -11,8 +11,10 @@ class Core {
 	public $pdo ;
 	public $db ;
 	public $currentPage ;
+	public $activeAuth ;
 
 	public function __construct(){
+		$this->activeAuth  = false ;
 		$this->dbSetUp();
 		$this->check_session();
 		$this->saveUser();
@@ -195,7 +197,6 @@ class Core {
 			die();
 		}
 	}
-
 	public function dataTable($fields=[]){
 			if(func_num_args() == 0){
 				$fields = [
@@ -279,16 +280,9 @@ class Core {
 
 
 
-			return $table ;
-
-		
+			return $table ;	
 	}
-
-
-
-
 	public function allUserData(){
-
 		$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 		$per_page_limit = 3;
 
@@ -298,30 +292,33 @@ class Core {
 			    ->page($page)
     			->limit($per_page_limit)
 			    ->run();
-
 		$totalUser =  $this->db->tbl_user->count()->run();
-		
 		if($totalUser > 0 && $totalUser <= $per_page_limit){
 			$total_page = 1;
 		}
 		if($totalUser > 0 && $totalUser > $per_page_limit){
 			$total_page = (($totalUser%$per_page_limit) == 0) ? $totalUser/$per_page_limit : ceil($totalUser/$per_page_limit) ;
-		}    
-
+		}
 		$userData = [
 			'allUserData' => $allUserData,
 			'total_page' => $total_page
-		];   
-			    
+		];
 		return $userData ;  
 	}
-
-
-
-
-
-
-
+	public function userCount(){
+		$totalEmpl =  $this->db->tbl_user
+						->count()
+						->where('is_employee = :is_employee', [':is_employee' => 1])
+						->run();
+		$totalUser =  $this->db->tbl_user
+						->count()
+						->where('is_employee = :is_employee', [':is_employee' => 0])
+						->run();
+		return [
+			'totalEmpl' => $totalEmpl,
+			'totalUser' => $totalUser
+		];
+	}
 }
 
 $core = new Core();

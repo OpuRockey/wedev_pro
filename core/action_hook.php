@@ -11,3 +11,15 @@ define('BASE_URL', dirname(sprintf(
 //echo BASE_PATH ;
 
 include BASE_PATH . "/core/Core.php" ;
+
+if(!$core->is_loggedIn() && $core->activeAuth == true){
+	if($core->currentPage == 'dashboard.php' 
+		|| $core->currentPage == 'edit_role.php'
+		|| $core->currentPage == 'add_role.php'
+		|| $core->currentPage == 'edit_user.php'
+		|| $core->currentPage == 'user.php'
+		|| $core->currentPage == 'user_datatable.php'){
+		header("Location: ".BASE_URL.'/login.php');
+	}
+}
+

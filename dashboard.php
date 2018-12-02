@@ -1,7 +1,6 @@
 
 <?php include('header.php'); ?>
 <?php include('left_sidebar.php'); ?>
-
 <div class="container-fluid">
 	<div class="row">
 		<h1 class="text-center">Dashboard</h1>
@@ -23,16 +22,10 @@
 		}
 		</style>
 		<?php
-		$allUsers = $core->allUser();
-		$employee = 0 ;
-		$userno = 0 ;
-		foreach ($allUsers as $user) {
-			if($user->is_employee == 1){
-				$employee++;
-			}else{
-				$userno++;
-			}	
-		}
+
+		$totalUserCount = $core->userCount();
+		$employee = $totalUserCount['totalEmpl'] ;
+		$userno = $totalUserCount['totalUser'] ;
 		?>
 		<!-- Resources -->
 		<script src="https://www.amcharts.com/lib/4/core.js"></script>
