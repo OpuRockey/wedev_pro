@@ -220,22 +220,26 @@ class Core {
 			}
 			$tableName = $fields[0];
 
+			$queryString = '?page=' ;
+			$queryString .= (isset($_GET['page'])) ? $_GET['page'] : 1 ;
+			$queryString .= '&order=';
+			$queryString .= (isset($_GET['order']) && $_GET['order'] == 'ASC') ? 'DESC' : 'ASC' ;
+
 			$thead = '<thead><tr>';
 			foreach ($fields[1] as $key => $value){
 				$thead .= '<th>';
-				$thead .= $value ;
+				$thead .= '<a href="'. $queryString . '&orderby='. $key .'">'. $value . '</a>' ;
 				$thead .= '</th>';
 			}
 			$thead .= '<tr><thead>';
-
 			$tbody = '<tbody>';
 			$page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 			$per_page_limit = $fields[3];
-
-			
+			$order = (isset($_GET['order'])) ? $_GET['order'] : 'ASC' ;
+			$orderby = (isset($_GET['orderby']) && $_GET['orderby'] != 'none') ? $_GET['orderby'] : 'id' ;
 			$allData = $this->db->$tableName
 				    ->select()
-				    ->orderBy('id ASC')
+				    ->orderBy("$orderby $order")
 				    ->page($page)
 	    			->limit($per_page_limit)
 				    ->run();

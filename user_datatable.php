@@ -33,7 +33,14 @@
 		</div>
 		
 	</div>
-</div>    
+</div>
+
+<script>
+	/*function sort_table(elm){
+		console.log();
+	}*/
+</script>
+
  
 <?php include('footer.php'); ?>
 
