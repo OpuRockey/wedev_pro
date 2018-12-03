@@ -8,12 +8,12 @@
 		<div class="">
 			<a class="btn btn-primary" href="add_user.php">Add User</a>
 			<?php 
-
 			$fields = [
 				'tbl_user',
 				[ 
 					'name' => 'Name' , 
 					'age'  => 'Age',
+					'dmy'  => 'Date/Month/Year',
 					'nickname' => 'NickName' , 
 					'is_employee' => 'Employee/User' ,
 					'none' => 'Action' 

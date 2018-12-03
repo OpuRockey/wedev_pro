@@ -24,7 +24,15 @@
 		            ?>
 		            <tr>
 		                <td><?= $user->name  ;?></td>
-		                <td><?= $user->age  ;?></td>
+		                <td><?php
+		                /*$dob = $user->date_of_year->format('Y-m-d');
+		                $d1 = new Datetime('now');
+						$d2 = new DateTime($dob);
+						$diff = $d2->diff($d1);
+						echo $diff->y;*/
+		                ?>
+		                <?= $user->age  ;?> <?= $user->dmy  ;?>s	
+		                </td>
 		                <td><?= $user->nickname  ;?></td>
 		                <td><?= ($user->is_employee == 1) ? 'Employee' : 'User'  ;?></td>
 		                <td>
