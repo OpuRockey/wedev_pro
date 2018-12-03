@@ -1,4 +1,10 @@
+<div class="bootom_msg">
 <?= $core->showMsg() ;?>
+<?= $core->showErrMsg() ;?>	
+</div>
+
+
+
  	</div>
  </div>
 </div>

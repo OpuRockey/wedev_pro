@@ -50,6 +50,23 @@ class Core {
 		$data = htmlspecialchars($data);
 		return $data;
 	}
+
+	private function validate($input){
+		$errorMsg = '';
+		if(is_array($input)){
+			foreach ($input as $key => $value) {
+				if(empty($value)){
+					$errorMsg .= ('<div class="alert alert-danger">' . strtoupper($key) . ' can\'t be blank</div>');
+				}
+				if($key == 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)){
+					$errorMsg .= ('<div class="alert alert-danger">' . strtoupper($key) . ' isn\'t a valid email</div>');
+				}
+			}
+		}
+		return $errorMsg;
+	}
+
+
 	private function saveUser(){
 		if(isset($_POST['add_user']) && $_POST['add_user'] == 'add_user'){
 			$email = $this->postFilter($_POST['email']);
@@ -57,6 +74,20 @@ class Core {
 			$name = $this->postFilter($_POST['name']);
 			$age = $this->postFilter($_POST['age']);
 			$dmy = $this->postFilter($_POST['dmy']);
+
+			$validation = $this->validate([
+				'email' => $email,
+				'password' => $password,
+				'name' => $name,
+				'age' => $age,
+				'dmy' => $dmy,
+			]);
+
+			if(!empty($validation)){
+				$this->storeErrMsg($validation);
+				return ;
+			}
+
 			if($dmy == 'day'){
 				$dateOfBirth = date('Y-m-d',strtotime("-$age days"));
 			}
@@ -128,7 +159,6 @@ class Core {
 			return $user ;
 		}
 	}
-
 	public function showMsg(){
 		if(isset($_SESSION['msg'])){
 			echo '<div class="alert alert-info">';
@@ -137,10 +167,23 @@ class Core {
 			unset($_SESSION['msg']) ;
 		}
 	}
-
+	public function showErrMsg(){
+		if(isset($_SESSION['errmsg'])){
+			echo '<div>';
+			echo $_SESSION['errmsg'] ;
+			echo '</div>';
+			unset($_SESSION['errmsg']) ;
+		}
+	}
 	public function storeMsg($msg = NULL){
 		if($msg != NULL){
 			$_SESSION['msg'] = $msg ;
+			return true;
+		}
+	}
+	public function storeErrMsg($msg = NULL){
+		if($msg != NULL){
+			$_SESSION['errmsg'] = $msg ;
 			return true;
 		}
 	}
@@ -283,7 +326,8 @@ class Core {
 			}
 			$pagination = '<div><ul class="pagination">';
 			for($i=1;$i<=$total_page;$i++) {
-				$pagination .= '<li><a href="?page='.$i.'">'.$i.'</a></li>';
+				$activeClass = ($page == $i) ? 'active' : '' ;
+				$pagination .= '<li class="'. $activeClass .'"><a href="?page='.$i.'">'.$i.'</a></li>';
 			}	
 			$pagination .= '</ul></div>';
 

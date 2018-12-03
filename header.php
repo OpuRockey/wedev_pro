@@ -39,7 +39,17 @@
     }
 
     .btn {
-      margin-bottom: 25px;
+      margin-bottom: 5px;
+    }
+
+    .bootom_msg {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      font-size: 15px;
+      font-weight: 800;
+      width: 300px;
+      text-align: center;
     }
 
 

@@ -22,7 +22,7 @@
 		            <tr>
 		                <td><?= $role->name  ;?></td>
 		                <td>
-		                	<a onclick="return confirm('Are you sure you want to delete this user?');" href="?delRoleid=<?= $role->id  ;?>">Delete</a>
+		                	<a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');" href="?delRoleid=<?= $role->id  ;?>"><span class="glyphicon glyphicon-remove"></span></a>
 		                </td>
 		            </tr>
 

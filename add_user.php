@@ -32,7 +32,7 @@
 				    <option value="year">Year</option>
 				  </select>
 				</div>
-			  <button type="submit" class="btn btn-default">Submit</button>
+			  <button type="submit" class="btn btn-primary">Sign up</button>
 			</form>
 		</div>
 	</div>

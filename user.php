@@ -36,8 +36,8 @@
 		                <td><?= $user->nickname  ;?></td>
 		                <td><?= ($user->is_employee == 1) ? 'Employee' : 'User'  ;?></td>
 		                <td>
-		                	<a href="edit_user.php?editid=<?= $user->id  ;?>">Edit</a> | 
-		                	<a onclick="return confirm('Are you sure you want to delete this user?');" href="?delUserid=<?= $user->id  ;?>">Delete</a>
+		                	<a class="btn btn-primary" href="edit_user.php?editid=<?= $user->id  ;?>"><span class="glyphicon glyphicon-edit"></span></a>
+		                	<a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');" href="?delUserid=<?= $user->id  ;?>"><span class="glyphicon glyphicon-remove"></span></a>
 		                </td>
 		            </tr>
 

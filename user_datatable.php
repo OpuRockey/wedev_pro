@@ -23,8 +23,8 @@
 				function($data){
 					return 
 					'<td>
-	                	<a href="edit_user.php?editid='.$data->id .'">Edit</a> | 
-	                	<a onclick="return confirm(\'Are you sure you want to delete this user?\');" href="?delUserid='.$data->id .'">Delete</a>
+	                	<a class="btn btn-primary" href="edit_user.php?editid='.$data->id .'"><span class="glyphicon glyphicon-edit"></span></a> 
+	                	<a class="btn btn-danger" onclick="return confirm(\'Are you sure you want to delete this user?\');" href="?delUserid='.$data->id .'"><span class="glyphicon glyphicon-remove"></span></a>
 	                </td>';
 				}
 			];
