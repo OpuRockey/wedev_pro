@@ -1,4 +1,4 @@
-
+<?= $core->showMsg() ;?>
  	</div>
  </div>
 </div>

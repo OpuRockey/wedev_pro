@@ -78,7 +78,7 @@ class Core {
 			    'nickname' => 'N/A'
 			]);
 			if($tbl_user->save()){
-				echo 'Data saved' ;
+				$this->storeMsg('Data saved');
 			}
 
 		}
@@ -117,7 +117,7 @@ class Core {
 			    ->limit(1);
 
 			$statement = $updateQuery();
-			echo 'Successfully Updated' ;    
+			$this->storeMsg('Data saved');   
 
 		}
 	}
@@ -128,6 +128,22 @@ class Core {
 			return $user ;
 		}
 	}
+
+	public function showMsg(){
+		if(isset($_SESSION['msg'])){
+			echo '<div class="alert alert-info">';
+			echo $_SESSION['msg'] ;
+			echo '</div>';
+			unset($_SESSION['msg']) ;
+		}
+	}
+
+	public function storeMsg($msg = NULL){
+		if($msg != NULL){
+			$_SESSION['msg'] = $msg ;
+			return true;
+		}
+	}
 	private function saveRole(){
 		if(isset($_POST['add_role']) && $_POST['add_role'] == 'add_role'){
 			$role_name = $this->postFilter($_POST['role_name']);
@@ -136,7 +152,7 @@ class Core {
 			    'created_at' => new Datetime('now')
 			]);
 			if($tbl_role->save()){
-				echo 'Data saved' ;
+				$this->storeMsg('Data saved');
 			}
 
 		}
